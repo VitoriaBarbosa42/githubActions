@@ -1,0 +1,46 @@
+Resumo — Agendamento Automático com Cron no GitHub Actions
+
+⏰ O que é o schedule + cron?
+Permite executar workflows automaticamente em horários programados, sem precisar de nenhuma ação manual. Ideal para:
+
+Relatórios diários
+Verificações de rotina
+Tarefas recorrentes em horários específicos
+
+
+🕐 Fuso Horário — Regra importante
+O GitHub Actions sempre usa UTC nos agendamentos. Para converter:
+ConversãoOperaçãoBrasília → UTCSomar 3hUTC → BrasíliaSubtrair 3h
+yaml# Exemplos
+'55 00 * * *'   # 21h55 horário de Brasília
+'05 01 * * *'   # 22h05 horário de Brasília
+
+💡 Use o site crontab.guru para validar sua expressão cron antes de subir.
+
+
+📋 Estrutura do workflow
+yamlon:
+  schedule:
+    - cron: '55 00 * * *'   # Horário em UTC
+  workflow_dispatch:         # Permite teste manual
+
+  Como ler o cron '55 00 * * *'
+ 55   00   *    *    *
+ │     │   │    │    └── Dia da semana  (0=Dom, 6=Sáb, * = todo dia)
+ │     │   │    └─────── Mês           (* = todo mês)
+ │     │   └──────────── Dia do mês    (* = todo dia)
+ │     └──────────────── Hora          (0-23)
+ └────────────────────── Minuto        (0-59)
+
+➕ Onde somar as 3h?
+Apenas na Hora (segundo número):
+Brasília 21h55  →  soma 3h na hora  →  UTC 00h55
+'55  21  * * *'                        '55  00  * * *'
+
+Se a soma ultrapassar 23, vira 0, 1, 2... — o dia "vira" para o seguinte, mas o * * * do restante não muda.
+
+✅ Boas práticas aprendidas
+
+Sempre adicione workflow_dispatch junto com schedule para poder testar sem esperar o horário
+Verifique a execução na aba Actions do GitHub
+Use cron para qualquer tarefa que precise rodar em horário fixo — você não precisa estar acordado! 🎯
