@@ -7,6 +7,9 @@ on:
         branches: [main]
     workflow_dispatch: 
 
+env:
+  NODE_VERSION: '18'
+
 jobs:
     hello-jobs:
         runs-on: ubuntu-latest

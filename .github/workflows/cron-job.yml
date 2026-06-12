@@ -1,0 +1,27 @@
+on:
+    schedule:
+        #Executa as 21:55 horario de brasilia
+        - cron: '55 00 * * *'   
+    workflow_dispatch: 
+
+jobs:
+    schedule-jobs:
+        runs-on: ubuntu-latest
+    
+    steps:
+        - name: Checkout codigo
+          uses: actions/checkout@v4
+
+        - name: Informações do Schedule
+          run: |
+            echo "Workflow disoarado por SCHEDULE" 
+            echo "Data atual: $(date)" 
+            echo "Horario UTC: $(date -u)" 
+            echo "Timezone: $(date +%Z)" 
+        - name: Relátorio diário automatizado
+          run: |
+            echo "RELATÓRIO DIÁRIO AUTOMATIZADO"
+            echo "====================="
+            echo "Total de commits: $(git rev-list --all --count)"
+            echo "Contribuidores únicos: $(git shorlog -sn |wc -l)"
+            echo "Último commit: $(git log -l --pretty=format:'%h - %s (%an, %ar)')"

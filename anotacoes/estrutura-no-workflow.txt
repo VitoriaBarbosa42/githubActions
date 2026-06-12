@@ -1,0 +1,35 @@
+🏗️ Os 3 elementos obrigatórios
+
+Todo workflow precisa ter esses blocos ou o GitHub Actions não reconhece o arquivo como válido:
+
+name:  # Nome visível na aba Actions do GitHub
+on:    # Quando o workflow será disparado (trigger)
+jobs:  # As tarefas que serão executadas
+
+🔔 Triggers (on)
+Define quando o workflow executa:
+on:
+  push:
+    branches: [main]        # Executa ao fazer push na main
+  pull_request:
+    branches: [main]        # Executa ao abrir um PR para a main
+  workflow_dispatch:        # Permite execução manual pela interface
+
+🌍 Variáveis de Ambiente (env)
+Variáveis globais acessíveis em qualquer job ou step:
+env:
+  NODE_VERSION: '18'   # Acessada como ${{ env.NODE_VERSION }}
+
+⚙️ Jobs e Steps
+ElementoO que fazruns-onDefine a máquina onde o job executastepsLista de tarefas sequenciais do jobusesUsa uma Action pronta (ex: actions/checkout@v4)runExecuta comandos shell diretamente
+
+📦 actions/checkout@v4
+Obrigatório em todo workflow que precisa do código do repositório — faz o download dos arquivos para dentro do runner.
+
+🔍 Variáveis de Contexto úteis
+Variável                            O que retorna
+${{ env.NODE_VERSION }}             Variável global definida no env
+${{ github.repository }}            Nome completo do repositório
+${{ github.ref_name }}              Branch atual (ex: main)
+${{ github.actor }}                 Usuário que disparou o workflow
+${{ runner.os }}                    Sistema operacional do runner
