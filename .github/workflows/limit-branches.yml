@@ -7,7 +7,7 @@ on:
             - develop
         paths:
             - 'src/**' #  Criar esses arquivos para funcionar
-            - 'REDME.md' #  Criar esses arquivos para funcionar
+            - 'README.md' #  Criar esses arquivos para funcionar
 
 jobs:
     push-jobs:
@@ -20,8 +20,8 @@ jobs:
             - name: Informações de Push
               run: |
                 echo "Workflow disparado por PUSH" 
-                echo "Commit: $ {{github.sha}}"
-                echo "Autor: $ {{github.actor}}"
-                echo "Branch: $ {{github.ref_name}}"
-                echo "Repositoria: $ {{github.repository}}"
+                echo "Commit: ${{github.sha}}"
+                echo "Autor: ${{github.actor}}"
+                echo "Branch: ${{github.ref_name}}"
+                echo "Repositoria: ${{github.repository}}"
                 
