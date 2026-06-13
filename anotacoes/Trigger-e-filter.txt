@@ -1,0 +1,32 @@
+Resumo — Push Trigger e Filtros no GitHub Actions
+
+🎯 Objetivo da aula
+Fazer o workflow executar somente quando houver mudanças relevantes, evitando execuções desnecessárias e otimizando recursos.
+
+🔔 Filtros do trigger push
+yamlon:
+  push:
+    branches:
+      - main
+      - develop       # Só roda nessas branches
+    paths:
+      - 'src/**'      # Só roda se alterar algo dentro de src/
+      - 'README.md'   # Ou se alterar o README
+
+📋 Como funciona na prática
+AçãoPipeline executa?Push na main alterando src/✅ SimPush na main alterando README.md✅ SimPush em outra branch❌ NãoPush na main alterando arquivo fora do src/❌ Não
+As duas condições precisam ser satisfeitas — branch correta e arquivo correto.
+
+💡 Por que isso é importante?
+Em projetos reais, nem todo push precisa rodar a pipeline inteira. Com filtros você:
+
+Economiza minutos do GitHub Actions
+Evita execuções desnecessárias
+Mantém a pipeline mais organizada e eficiente
+
+
+🔍 Variáveis de contexto úteis no push
+yaml${{ github.sha }}        # Hash do commit
+${{ github.actor }}      # Autor do push
+${{ github.ref_name }}   # Branch do push
+${{ github.repository }} # Nome do repositório
