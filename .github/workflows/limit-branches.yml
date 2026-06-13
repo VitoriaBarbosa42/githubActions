@@ -1,0 +1,27 @@
+### Executa apenas em push
+
+on:
+    push:
+        branches: 
+            - main
+            - develop
+        paths:
+            - 'src/**' #  Criar esses arquivos para funcionar
+            - 'REDME.md' #  Criar esses arquivos para funcionar
+
+jobs:
+    push-jobs:
+        runs-on: ubuntu-lastet
+        
+        steps:
+            - name: Checkout código
+              uses: actions/checkout@v4
+
+            - name: Informações de Push
+              run: |
+                echo "Workflow disparado por PUSH" 
+                echo "Commit: $ {{github.sha}}"
+                echo "Autor: $ {{github.actor}}"
+                echo "Branch: $ {{github.ref_name}}"
+                echo "Repositoria: $ {{github.repository}}"
+                
