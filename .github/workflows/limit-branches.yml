@@ -11,7 +11,7 @@ on:
 
 jobs:
     push-jobs:
-        runs-on: ubuntu-lastet
+        runs-on: ubuntu-latest
         
         steps:
             - name: Checkout código
